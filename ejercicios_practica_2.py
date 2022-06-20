@@ -27,7 +27,14 @@ def ej3():
     # para cumplir con el enunciado del ejercicio
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
+    with open(archivo,'r') as csvfile:
+        data = list(csv.DictReader(csvfile))
+
+    total_tornillos = 0
+    for elementos in data:
+        total_tornillos = total_tornillos + int(elementos['tornillos'])
     
+    print("El Total de Tornillos es:",total_tornillos)
 
 
 def ej4():
@@ -47,7 +54,26 @@ def ej4():
     # utilizando "try except", tema que se verá la clase que viene.
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
+    with open(archivo,'r') as csvfile:
+        data = list(csv.DictReader(csvfile))
 
+    total_2_ambientes = 0
+    total_3_ambientes = 0
+    cantidad_filas = len(data)
+    for i in range(cantidad_filas):
+        row=data[i]
+        try:
+           v_ambientes = int(row.get('ambientes'))
+           if v_ambientes==2:
+                total_2_ambientes = total_2_ambientes + 1
+           elif v_ambientes==3:
+                total_3_ambientes = total_3_ambientes + 1 
+        except:
+           print('Error Fila', i, 'dato Ambientes faltante')
+   
+    
+    print("El Total de 2 Ambientes es:",total_2_ambientes)
+    print("El Total de 3 Ambientes es:",total_3_ambientes)
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
